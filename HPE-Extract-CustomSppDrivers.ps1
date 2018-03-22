@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-HPE-Extract-CustomSppDrivers version 1.0
+HPE-Extract-CustomSppDrivers version 2.0 , March 2018
 Powershell Script which extracts appropriate drivers from Custom SPP provided as parameter to the script
 
 .DESCRIPTION
@@ -111,7 +111,10 @@ foreach ($item in $items)
                         Copy-Item ($path+"\"+$item+"\"+"*" + ".exe") ($driversFolder + "\" + $associatedDriverFolderName)
                         Copy-Item ($path+"\"+$item+"\"+"*" + ".rtf") ($driversFolder + "\" + $associatedDriverFolderName)
                         Copy-Item ($path+"\"+$item+"\"+"*" + ".def") ($driversFolder + "\" + $associatedDriverFolderName)
-
+						Copy-Item ($path+"\"+$item+"\"+"*" + ".cz") ($driversFolder + "\" + $associatedDriverFolderName)
+                        Copy-Item ($path+"\"+$item+"\"+"*" + ".ml") ($driversFolder + "\" + $associatedDriverFolderName)
+                        Copy-Item ($path+"\"+$item+"\"+"*" + ".bin") ($driversFolder + "\" + $associatedDriverFolderName)
+                        Copy-Item ($path+"\"+$item+"\"+"*" + ".config") ($driversFolder + "\" + $associatedDriverFolderName)
                     }
 
                     # for special cases
@@ -163,6 +166,11 @@ foreach ($item in $items)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".exe") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".rtf") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".def") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".cz") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".ml") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".bin") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".config") ($driversFolder + "\" + $associatedDriverFolderNameCornerCase)
+
 
                         }
 
@@ -186,9 +194,10 @@ foreach ($item in $items)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".exe") ($driversFolder + "\" + $SpecialDriverINFName)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".rtf") ($driversFolder + "\" + $SpecialDriverINFName)
                             Copy-Item ($path+"\"+$item+"\"+"*" + ".def") ($driversFolder + "\" + $SpecialDriverINFName)
-
-
-
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".cz") ($driversFolder + "\" + $SpecialDriverINFName)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".ml") ($driversFolder + "\" + $SpecialDriverINFName)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".bin") ($driversFolder + "\" + $SpecialDriverINFName)
+			    Copy-Item ($path+"\"+$item+"\"+"*" + ".config") ($driversFolder + "\" + $SpecialDriverINFName)
                     }
 
                     elseif ($driverEntry.name -like "MxG2h*")
@@ -370,6 +379,10 @@ foreach ($item in $items)
                                                         Copy-Item ($path+"\"+$item+"\"+"*" + ".exe") ($driversFolder + "\" + $associatedDriverFolderName)
                                                         Copy-Item ($path+"\"+$item+"\"+"*" + ".rtf") ($driversFolder + "\" + $associatedDriverFolderName)
                                                         Copy-Item ($path+"\"+$item+"\"+"*" + ".def") ($driversFolder + "\" + $associatedDriverFolderName)
+							Copy-Item ($path+"\"+$item+"\"+"*" + ".cz") ($driversFolder + "\" + $associatedDriverFolderName)
+							Copy-Item ($path+"\"+$item+"\"+"*" + ".ml") ($driversFolder + "\" + $associatedDriverFolderName)
+							Copy-Item ($path+"\"+$item+"\"+"*" + ".bin") ($driversFolder + "\" + $associatedDriverFolderName)
+							Copy-Item ($path+"\"+$item+"\"+"*" + ".config") ($driversFolder + "\" + $associatedDriverFolderName)
 
                         }
                     }
