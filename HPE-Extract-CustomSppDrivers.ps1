@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-HPE-Extract-CustomSppDrivers version 2.0 , March 2018
+HPE-Extract-CustomSppDrivers version 3.0 , April 2019
 Powershell Script which extracts appropriate drivers from Custom SPP provided as parameter to the script
 
 .DESCRIPTION
@@ -243,13 +243,38 @@ foreach ($item in $items)
                 New-Item -Path ($driversFolder + "\" + $associatedDriverFolderName) -ItemType directory -force
                 $mydocuments = [environment]::getfolderpath("mydocuments")
 
+ 		if($path -like "*2019Custom*")
+                {
+                if($subitem -like "elxdrvr*")
+                {
+                $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2019")
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
+
+                }
+                else
+                {
+                $elxdrvrFolderPath = ($mydocuments + "\Broadcom\Drivers\*\x64\win2019")
+                Copy-Item ($elxdrvrFolderPath + "\" + "oemsetup.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
+                }
+
+
+                }
+
 
                 if($path -like "*2016Custom*")
                 {
                 if($subitem -like "elxdrvr*")
                 {
                 $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2016")
-                Copy-Item ($elxdrvrFolderPath + "\" + "elxplus.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
@@ -276,7 +301,7 @@ foreach ($item in $items)
                 if($subitem -like "elxdrvr*")
                 {
                 $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2012")
-                Copy-Item ($elxdrvrFolderPath + "\" + "elxplus.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
@@ -300,7 +325,7 @@ foreach ($item in $items)
                 if($subitem -like "elxdrvr*")
                 {
                 $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2012R2")
-                Copy-Item ($elxdrvrFolderPath + "\" + "elxplus.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
@@ -396,11 +421,19 @@ foreach ($item in $items)
     }
 }
 #drivers output folders
+$2019drviersFolder = "ws2019-x64"
 $2016drviersFolder = "ws2016-x64"
 $2012drviersFolder = "ws2012-x64"
 $2012r2drviersFolder = "ws2012r2-x64"
 
 New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers") -ItemType directory -force
+
+if($path -like "*2019Custom*")
+{
+
+    New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers\" + $2019drviersFolder) -ItemType directory -force
+    Copy-Item ($path+"\"+"drivers"+"\"+"*" + "*") ($OutPutLocationofDrivers + "\" + "drivers\" + $2019drviersFolder) -recurse -force
+}
 
 if($path -like "*2016Custom*")
 {
