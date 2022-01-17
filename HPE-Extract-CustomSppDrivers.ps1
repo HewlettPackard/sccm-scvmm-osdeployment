@@ -243,7 +243,32 @@ foreach ($item in $items)
                 New-Item -Path ($driversFolder + "\" + $associatedDriverFolderName) -ItemType directory -force
                 $mydocuments = [environment]::getfolderpath("mydocuments")
 
- 		if($path -like "*2019Custom*")
+			if($path -like "*2022Custom*")
+                {
+                if($subitem -like "elxdrvr*")
+                {
+                $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2022")
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
+
+                }
+                else
+                {
+                $elxdrvrFolderPath = ($mydocuments + "\Broadcom\Drivers\*\x64\win2022")
+                Copy-Item ($elxdrvrFolderPath + "\" + "oemsetup.inf") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
+                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
+                }
+
+
+                }
+		
+			if($path -like "*2019Custom*")
                 {
                 if($subitem -like "elxdrvr*")
                 {
@@ -269,7 +294,7 @@ foreach ($item in $items)
                 }
 
 
-                if($path -like "*2016Custom*")
+			if($path -like "*2016Custom*")
                 {
                 if($subitem -like "elxdrvr*")
                 {
@@ -291,56 +316,6 @@ foreach ($item in $items)
                 Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
                 }
 
-
-                }
-
-
-                if($path -like "*2012Custom*")
-                {
-
-                if($subitem -like "elxdrvr*")
-                {
-                $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2012")
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
-                }
-                else
-                {
-                $elxdrvrFolderPath = ($mydocuments + "\Broadcom\Drivers\*\x64\win2012")
-                Copy-Item ($elxdrvrFolderPath + "\" + "oemsetup.inf") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
-                }
-
-                }
-
-                if($path -like "*2012r2Custom*")
-                {
-
-                if($subitem -like "elxdrvr*")
-                {
-                $elxdrvrFolderPath = ($mydocuments + "\Emulex\Drivers\*\x64\win2012R2")
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.inf") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
-                }
-                else
-                {
-                $elxdrvrFolderPath = ($mydocuments + "\Broadcom\Drivers\*\x64\win2012R2")
-                Copy-Item ($elxdrvrFolderPath + "\" + "oemsetup.inf") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.cat") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.sys") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.dll") ($driversFolder + "\" + $associatedDriverFolderName)
-                Copy-Item ($elxdrvrFolderPath + "\" + "*.exe") ($driversFolder + "\" + $associatedDriverFolderName)
-
-                }
 
                 }
 
@@ -421,12 +396,18 @@ foreach ($item in $items)
     }
 }
 #drivers output folders
+$2022drviersFolder = "ws2022-x64"
 $2019drviersFolder = "ws2019-x64"
 $2016drviersFolder = "ws2016-x64"
-$2012drviersFolder = "ws2012-x64"
-$2012r2drviersFolder = "ws2012r2-x64"
 
 New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers") -ItemType directory -force
+
+if($path -like "*2022Custom*")
+{
+
+    New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers\" + $2022drviersFolder) -ItemType directory -force
+    Copy-Item ($path+"\"+"drivers"+"\"+"*" + "*") ($OutPutLocationofDrivers + "\" + "drivers\" + $2022drviersFolder) -recurse -force
+}
 
 if($path -like "*2019Custom*")
 {
@@ -440,19 +421,6 @@ if($path -like "*2016Custom*")
 
     New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers\" + $2016drviersFolder) -ItemType directory -force
     Copy-Item ($path+"\"+"drivers"+"\"+"*" + "*") ($OutPutLocationofDrivers + "\" + "drivers\" + $2016drviersFolder) -recurse -force
-}
-if($path -like "*2012Custom*")
-{
-
-    New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers\" + $2012drviersFolder) -ItemType directory -force
-    Copy-Item ($path+"\"+"drivers"+"\"+"*" + "*") ($OutPutLocationofDrivers + "\" + "drivers\" + $2012drviersFolder) -recurse -force
-}
-
-if($path -like "*2012r2Custom*")
-{
-
-    New-Item -Path ($OutPutLocationofDrivers + "\" + "drivers\" + $2012r2drviersFolder) -ItemType directory -force
-    Copy-Item ($path+"\"+"drivers"+"\"+"*" + "*") ($OutPutLocationofDrivers + "\" + "drivers\" + $2012r2drviersFolder) -recurse -force
 }
 
 
